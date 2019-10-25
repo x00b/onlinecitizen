@@ -1,0 +1,25 @@
+Criar um ModelName(db.Model) correspondente aos dados crawlados por onctz/services/servicename.py
+Model file: onctz/api/model/models.py
+
+  Esquema do model:
+  
+  class ServiceName(db.Model)
+    '''
+      Cada dado(variavel) pego pelo serviço vira uma variavel que é correspondente a coluna na tabela 'servicename' 
+    '''
+    servicename_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    servicodado_nome = db.Column(db.String(200))
+    algumdado_crawlado = db.Column(db.String(200))
+    search_hash = db.Column(db.Integer, db.ForeignKey('search.search_hash'))
+
+    def __init__(self, servicodado_nome, algumdado_crawlado, search_hash):
+      self.servicodado_nome = servicodado_nome
+      self.algumdado_crawlado = algumdado_crawlado
+      self.search_hash = search_hash
+
+    '''
+      A funcao __init__ funciona como um setValue para a criação de uma coluna na tabela;
+
+      Passar valores -> criar uma row no database correspondente ao nome do model
+      [table_name] = ServiceName
+    '''

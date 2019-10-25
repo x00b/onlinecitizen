@@ -1,0 +1,12 @@
+pytz
+selenium
+flask
+flask-jwt-extended
+flask-sqlalchemy
+flask-marshmallow
+marshmallow-sqlalchemy
+celery
+redis
+rq
+configparser
+pytz

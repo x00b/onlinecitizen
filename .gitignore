@@ -1,0 +1,8 @@
+.git/
+.idea/
+__pycache__/
+
+*.sqlite
+*.txt
+dump.rdb
+geckodriver.log
