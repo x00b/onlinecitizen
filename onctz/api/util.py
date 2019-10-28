@@ -10,6 +10,7 @@ class Util:
         cadesp = None
         censec = None
         caged_resp = None
+        caged_trab = None
         detran_cnh = None
         infocrim = None
         jucesp = None
@@ -30,6 +31,13 @@ class Util:
 
         try:
             caged_resp = json.get('caged_resp')
+        except TypeError:
+            pass
+        except KeyError:
+            pass
+
+        try:
+            caged_trab = json.get('caged_trab')
         except TypeError:
             pass
         except KeyError:
@@ -63,15 +71,16 @@ class Util:
         except KeyError:
             pass
 
-        return [arpenp, cadesp, caged_resp, censec, detran_cnh, infocrim, jucesp]
+        return [arpenp, cadesp, caged_resp, caged_trab, censec, detran_cnh, infocrim, jucesp]
 
     def format_export(self, hash):
         search_data = modeller.Search.query.filter_by(search_hash=hash).first()
         arpenp_data = modeller.Arpenp.query.filter_by(search_hash=hash).first()
         cadesp_data = modeller.Cadesp.query.filter_by(search_hash=hash).first()
         cagedresp_data = modeller.CagedResponsavel.query.filter_by(search_hash=hash).first()
+        cagedtrab_data = modeller.CagedTrabalhador.query.filter_by(search_hash=hash).first()
         censec_data = modeller.Censec.query.filter_by(search_hash=hash).first()
-        detrancnh_data = modeller.DetranCondutor.query.filter_by(search_hash=hash).first()
+        detrancnh_data = modeller.DetranCnh.query.filter_by(search_hash=hash).first()
         infocrim_data = modeller.Infocrim.query.filter_by(search_hash=hash).first()
         jucesp_data = modeller.Jucesp.query.filter_by(search_hash=hash).first()
 
@@ -79,11 +88,12 @@ class Util:
         arpenpstruct = modeller.ArpenpStruct().dump(arpenp_data)
         cadespstruct = modeller.CadespStruct().dump(cadesp_data)
         cagedrespstruct = modeller.CagedResponsavelStruct().dump(cagedresp_data)
+        cagedtrabstruct = modeller.CagedTrabalhadorStruct().dump(cagedtrab_data)
         censecstruct = modeller.CensecStruct().dump(censec_data)
         detrancnhstruct = modeller.DetranCnhStruct().dump(detrancnh_data)
         infocrimstruct = modeller.InfocrimStruct().dump(infocrim_data)
         jucespstruct = modeller.JucespStruct().dump(jucesp_data)
 
-        aux = dict(search=searchstruct, arpenp=arpenpstruct, cadesp=cadespstruct, caged_resp=cagedrespstruct, censec=censecstruct, detran_cnh=detrancnhstruct, infocrim=infocrimstruct, jucesp=jucespstruct)
+        aux = dict(search=searchstruct, arpenp=arpenpstruct, cadesp=cadespstruct, caged_resp=cagedrespstruct, caged_trab=cagedtrabstruct, censec=censecstruct, detran_cnh=detrancnhstruct, infocrim=infocrimstruct, jucesp=jucespstruct)
         search_result = modeller.ResultStruct().dump(aux)
         return search_result

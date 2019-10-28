@@ -43,10 +43,11 @@ class Pilot:
         0: 'arpenp',
         1: 'cadesp',
         2: 'caged_resp',
-        3: 'censec',
-        4: 'detran_cnh',
-        5: 'infocrim',
-        6: 'jucesp'
+        3: 'caged_trab',
+        4: 'censec',
+        5: 'detran_cnh',
+        6: 'infocrim',
+        7: 'jucesp'
     }
 
     relatorio = ("<!DOCTYPE html>\n"
@@ -134,6 +135,30 @@ class Pilot:
             "        </div>\n"
             "      </article>"),
         3: ("\n"
+            "              <article class=\"message\">\n"
+            "        <div class=\"message-header\">\n"
+            "          <p>Caged Trabalhador</p>\n"
+            "        </div>\n"
+            "        <div class=\"message-body\">\n"
+            "          <ul>\n"
+            "            <li>Nome: {nome}</li>\n"
+            "            <li>Pis base: {pis_base}</li>\n"
+            "            <li>  Convertido: {pis_convertido}</li>\n"
+            "            <li>CPF: {cpf}</li>\n"
+            "            <li>CTPS: {ctps}</li>\n"
+            "            <li>Situacao Pis: {situacao_pis}</li>\n"
+            "            <li>Nacionalidade: {nacionalidade}</li>\n"
+            "            <li>Grau Instrucao: {grau_instrucao}</li>\n"
+            "            <li>Deficiente: {pessoa_deficiencia}</li>\n"
+            "            <li>Nascimento: {nascimento}</li>\n"
+            "            <li>UF CTPS: {uf_ctps}</li>\n"
+            "            <li>Sexo: {sexo}</li>\n"
+            "            <li>Raca: {raca}</li>\n"
+            "            <li>CEP: {cep}</li>\n"
+            "          </ul>\n"
+            "        </div>\n"
+            "      </article>"),
+        4: ("\n"
             "        <article class=\"message\">\n"
             "        <div class=\"message-header\">\n"
             "          <p>Censec</p>\n"
@@ -148,10 +173,12 @@ class Pilot:
             "          </ul>\n"
             "        </div>\n"
             "      </article>"),
-        4: ("\n"
-            "            <h3>\n"
-            "            Detran CNH\n"
-            "            </h3>\n"
+        5: ("\n"
+            "        <article class=\"message\">\n"
+            "        <div class=\"message-header\">\n"
+            "          <p>DetranCNH</p>\n"
+            "        </div>\n"
+            "        <div class=\"message-body\">\n"
             "                <ul>\n"
             "                <li>Renach: {renach}</li>\n"
             "                <li>Categoria: {categoria}</li>\n"
@@ -164,12 +191,16 @@ class Pilot:
             "                <li>Nome Pai: {nome_pai}</li>\n"
             "                <li>Registro: {registro}</li>\n"
             "                <li>Tipografico: {tipografico}</li>\n"
-            "            </ul>"),
-        5: ".",
-        6: ("\n"
-            "            <h3>\n"
-            "            Jucesp\n"
-            "            </h3>\n"
+            "          </ul>\n"
+            "        </div>\n"
+            "      </article>"),
+        6: ".",
+        7: ("\n"
+            "        <article class=\"message\">\n"
+            "        <div class=\"message-header\">\n"
+            "          <p>Jucesp</p>\n"
+            "        </div>\n"
+            "        <div class=\"message-body\">\n"
             "                <ul>\n"
             "                <li>Nome Emp: {nome_emp}</li>\n"
             "                <li>Tipo Emp: {tipo_emp}</li>\n"
@@ -186,7 +217,9 @@ class Pilot:
             "                <li>Complemento: {complemento}</li>\n"
             "                <li>CEP: {cep}</li>\n"
             "                <li>UF: {uf}</li>\n"
-            "            </ul>")
+            "          </ul>\n"
+            "        </div>\n"
+            "      </article>")
         }
 
     def search(self, browser):

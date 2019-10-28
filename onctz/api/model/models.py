@@ -71,6 +71,7 @@ class CadespStruct(Schema):
     regimeEstadual = fields.Str()
     postoFiscal = fields.Str()
 
+
 class CagedResponsavelStruct(Schema):
     cnpj_cpf = fields.Str()
     razao_social = fields.Str()
@@ -83,6 +84,24 @@ class CagedResponsavelStruct(Schema):
     cpf = fields.Str()
     telefone = fields.Str()
     email = fields.Str()
+
+
+class CagedTrabalhadorStruct(Schema):
+    nome = fields.Str()
+    pis_base = fields.Str()
+    pis_convertido = fields.Str()
+    cpf = fields.Str()
+    ctps = fields.Str()
+    situacao_pis = fields.Str()
+    nacionalidade = fields.Str()
+    grau_instrucao = fields.Str()
+    pessoa_deficiencia = fields.Str()
+    nascimento = fields.Str()
+    uf_ctps = fields.Str()
+    sexo = fields.Str()
+    raca = fields.Str()
+    cep = fields.Str()
+
 
 class CensecStruct(Schema):
     carga = fields.Str()
@@ -146,6 +165,7 @@ class ResultStruct(Schema):
     arpenp = fields.Nested(ArpenpStruct())
     cadesp = fields.Nested(CadespStruct())
     caged_resp = fields.Nested(CagedResponsavelStruct())
+    caged_trab = fields.Nested(CagedTrabalhadorStruct())
     censec = fields.Nested(CensecStruct())
     detran_cnh = fields.Nested(DetranCnhStruct())
     infocrim = fields.Nested(InfocrimStruct())
@@ -278,27 +298,11 @@ class CagedEmpresa(db.Model):
         self.search_hash = search_hash
 
 
-class CagedTrabalhadorStruct(Schema):
-    nome = fields.Str()
-    pis_base = fields.Str()
-    pis_convertido = fields.Str()
-    cpf = fields.Str()
-    ctps = fields.Str()
-    situacao_pis = fields.Str()
-    nacionalidade = fields.Str()
-    grau_instrucao = fields.Str()
-    pessoa_deficiencia = fields.Str()
-    nascimento = fields.Str()
-    uf_ctps = fields.Str()
-    sexo = fields.Str()
-    raca = fields.Str()
-    cep = fields.Str()
-
-
 class CagedTrabalhador(db.Model):
     caged_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     nome = db.Column(db.String(200))
     pis_base = db.Column(db.String(200))
+    pis_convertido = db.Column(db.String(200))
     cpf = db.Column(db.String(200))
     ctps = db.Column(db.String(200))
     situacao_pis = db.Column(db.String(200))
@@ -312,9 +316,11 @@ class CagedTrabalhador(db.Model):
     cep = db.Column(db.String(200))
     search_hash = db.Column(db.Integer, db.ForeignKey('search.search_hash'))
 
-    def __init__(self, nome, pis_base, cpf, ctps, situacao_pis, nacionalidade, grau_instrucao, pessoa_deficiencia, nascimento, uf_ctps, sexo, raca, cep, search_hash):
+    def __init__(self, nome, pis_base, pis_convertido, cpf, ctps, situacao_pis, nacionalidade, grau_instrucao, pessoa_deficiencia, nascimento, uf_ctps, sexo, raca, cep, search_hash):
         self.nome = nome
         self.pis_base = pis_base
+        self.pis_convertido = pis_convertido
+        self.cpf = cpf
         self.ctps = ctps
         self.situacao_pis = situacao_pis
         self.nacionalidade = nacionalidade

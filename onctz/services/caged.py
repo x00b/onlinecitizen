@@ -9,6 +9,7 @@ class Caged:
         self.driver = browser.driver
         self.cagedresponsavel_data = None
         self.cagedempresa_data = None
+        self.cagedtrabalhador_data = None
         self.Model = model
 
     def login(self, login, password):
@@ -39,7 +40,7 @@ class Caged:
         telefone = self.driver.find_element_by_xpath("//*[@id='conteudo']/fieldset[3]/div[3]/div[1]/div[2]").text
         email = self.driver.find_element_by_xpath("//*[@id='txt11_email']").text
 
-        self.cagedresponsavel_data = modeller.CagedResponsavel(cnpj_cpf, razao_social, logradouro, bairro, municipio, uf,cep, nome, cpf, telefone, email, self.Model.search_hash)
+        self.cagedresponsavel_data = modeller.CagedResponsavel(cnpj_cpf, razao_social, logradouro, bairro, municipio, uf, cep, nome, cpf, telefone, email, self.Model.search_hash)
         self.driver.quit()
         return self.cagedresponsavel_data
 
@@ -88,20 +89,7 @@ class Caged:
         raca = self.driver.find_element_by_xpath("//*[@id='conteudo']/fieldset[2]/div[4]/div[2]/div[2]").text
         cep = self.driver.find_element_by_xpath("//*[@id='conteudo']/fieldset[2]/div[6]/div[2]/div[2]").text
         self.driver.find_element_by_xpath("//*[@id='HistoricoMov_Trabalhador_2:panelTabbedPane_resumo_trabalhador_2:movimentos_rais_caged_4']/div/a").click()
-        print(nome)
-        print(pis_base)
-        print(pis_convertido)
-        print(cpf)
-        print(ctps)
-        print(situacao_pis)
-        print(nacionalidade)
-        print(grau_instrucao)
-        print(pessoa_deficiencia)
-        print(nascimento)
-        print(uf_ctps)
-        print(sexo)
-        print(raca)
-        print(cep)
 
-        sleep(5)
+        self.cagedtrabalhador_data = modeller.CagedTrabalhador(nome, pis_base, pis_convertido, cpf, ctps, situacao_pis, nacionalidade, grau_instrucao, pessoa_deficiencia, nascimento, uf_ctps, sexo, raca, cep, self.Model.search_hash)
         self.driver.quit()
+        return self.cagedtrabalhador_data
