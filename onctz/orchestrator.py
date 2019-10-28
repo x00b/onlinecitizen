@@ -29,6 +29,10 @@ class Orchestrator:
             proc = Process(target=conf.engine.cagedtrab_search, args=(pilot, search_hash, target))
             self.pool.append(proc)
             proc.start()
+        elif service_name == 'caged_emp':
+            proc = Process(target=conf.engine.cagedemp_search, args=(pilot, search_hash, target))
+            self.pool.append(proc)
+            proc.start()
         elif service_name == 'censec':
             proc = Process(target=conf.engine.censec_search, args=(pilot, search_hash, target))
             self.pool.append(proc)

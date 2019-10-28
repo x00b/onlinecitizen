@@ -81,6 +81,14 @@ class Engine:
         self.db.add(cagedtrab)
         self.db.commit()
 
+    def cagedemp_search(self, pilot, search_hash, target):
+        brw = self.newinstance()
+        pilot.search(brw)
+        pilot.service.setModel(search_hash)
+        cagedemp = pilot.service.caged_empresa(target)
+        self.db.add(cagedemp)
+        self.db.commit()
+
     def censec_search(self, pilot, search_hash, target):
         brw = self.newinstance()
         pilot.search(brw)
@@ -157,6 +165,14 @@ class Service:
         v_caged.search_trab(chave)
         v_caged.get_results_trab()
         return v_caged.cagedtrabalhador_data
+
+    def caged_empresa(self, chave):
+        v_caged = Caged(self.browser, self.model)
+        self.browser.navigate('http://fiap:mpsp@ec2-18-231-116-58.sa-east-1.compute.amazonaws.com/caged/login.html')
+        v_caged.login('login', 'senha')
+        v_caged.search_emp(chave)
+        v_caged.get_results_emp()
+        return v_caged.cagedempresa_data
 
     def censec(self, cpf_cnpj):
         v_censec = Censec(self.browser, self.model)

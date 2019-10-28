@@ -103,6 +103,15 @@ class CagedTrabalhadorStruct(Schema):
     cep = fields.Str()
 
 
+class CagedEmpresaStruct(Schema):
+    cnpj = fields.Str()
+    razao_social = fields.Str()
+    cnae = fields.Str()
+    numero_filiais = fields.Str()
+    total_vinculos = fields.Str()
+    desligamentos = fields.Str()
+
+
 class CensecStruct(Schema):
     carga = fields.Str()
     data = fields.Str()
@@ -166,6 +175,7 @@ class ResultStruct(Schema):
     cadesp = fields.Nested(CadespStruct())
     caged_resp = fields.Nested(CagedResponsavelStruct())
     caged_trab = fields.Nested(CagedTrabalhadorStruct())
+    caged_emp = fields.Nested(CagedEmpresaStruct())
     censec = fields.Nested(CensecStruct())
     detran_cnh = fields.Nested(DetranCnhStruct())
     infocrim = fields.Nested(InfocrimStruct())
@@ -267,15 +277,6 @@ class CagedResponsavel(db.Model):
         self.telefone = telefone
         self.email = email
         self.search_hash = search_hash
-
-
-class CagedEmpresaStruct(Schema):
-    cnpj = fields.Str()
-    razao_social = fields.Str()
-    cnae = fields.Str()
-    numero_filiais = fields.Str()
-    total_vinculos = fields.Str()
-    desligamentos = fields.Str()
 
 
 class CagedEmpresa(db.Model):

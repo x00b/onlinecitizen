@@ -44,10 +44,11 @@ class Pilot:
         1: 'cadesp',
         2: 'caged_resp',
         3: 'caged_trab',
-        4: 'censec',
-        5: 'detran_cnh',
-        6: 'infocrim',
-        7: 'jucesp'
+        4: 'caged_emp',
+        5: 'censec',
+        6: 'detran_cnh',
+        7: 'infocrim',
+        8: 'jucesp'
     }
 
     relatorio = ("<!DOCTYPE html>\n"
@@ -161,6 +162,22 @@ class Pilot:
         4: ("\n"
             "        <article class=\"message\">\n"
             "        <div class=\"message-header\">\n"
+            "          <p>Caged Empresa</p>\n"
+            "        </div>\n"
+            "        <div class=\"message-body\">\n"
+            "          <ul>\n"
+            "            <li>CNPJ: {cnpj}</li>\n"
+            "            <li>Razao Social: {razao_social}</li>\n"
+            "            <li>CNAE: {cnae}</li>\n"
+            "            <li>Numero Filiais: {numero_filiais}</li>\n"
+            "            <li>Vinculos: {total_vinculos}</li>\n"
+            "            <li>Desligamentos: {desligamentos}</li>\n"
+            "          </ul>\n"
+            "        </div>\n"
+            "      </article>"),
+        5: ("\n"
+            "        <article class=\"message\">\n"
+            "        <div class=\"message-header\">\n"
             "          <p>Censec</p>\n"
             "        </div>\n"
             "        <div class=\"message-body\">\n"
@@ -173,7 +190,7 @@ class Pilot:
             "          </ul>\n"
             "        </div>\n"
             "      </article>"),
-        5: ("\n"
+        6: ("\n"
             "        <article class=\"message\">\n"
             "        <div class=\"message-header\">\n"
             "          <p>DetranCNH</p>\n"
@@ -194,8 +211,18 @@ class Pilot:
             "          </ul>\n"
             "        </div>\n"
             "      </article>"),
-        6: ".",
         7: ("\n"
+            "        <article class=\"message\">\n"
+            "        <div class=\"message-header\">\n"
+            "          <p>Infocrim</p>\n"
+            "        </div>\n"
+            "        <div class=\"message-body\">\n"
+            "          <ul>\n"
+            "            <li>Relatorio: {relatorio}</li>\n"
+            "          </ul>\n"
+            "        </div>\n"
+            "      </article>"),
+        8: ("\n"
             "        <article class=\"message\">\n"
             "        <div class=\"message-header\">\n"
             "          <p>Jucesp</p>\n"
