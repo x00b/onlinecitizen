@@ -57,6 +57,10 @@ class Orchestrator:
             proc = Process(target=conf.engine.sivecnome_search, args=(pilot, search_hash, target))
             self.pool.append(proc)
             proc.start()
+        elif service_name == 'sivec_sap':
+            proc = Process(target=conf.engine.sivecsap_search, args=(pilot, search_hash, target))
+            self.pool.append(proc)
+            proc.start()
 
     def conclude(self):
         for proc in self.pool:

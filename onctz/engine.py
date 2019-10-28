@@ -140,6 +140,14 @@ class Engine:
         self.db.add(sivec)
         self.db.commit()
 
+    def sivecsap_search(self, pilot, search_hash, target):
+        brw = self.newinstance()
+        pilot.search(brw)
+        pilot.service.setModel(search_hash)
+        sivecsap = pilot.service.sivec_sap(target)
+        self.db.add(sivecsap)
+        self.db.commit()
+
 
 class Service:
     def __init__(self, browser):
@@ -237,3 +245,11 @@ class Service:
         v_sivec.search_nome(nome)
         v_sivec.get_results_nome()
         return v_sivec.sivecnome_data
+
+    def sivec_sap(self, sap):
+        v_sivec = Sivec(self.browser, self.model)
+        self.browser.navigate('http://fiap:mpsp@ec2-18-231-116-58.sa-east-1.compute.amazonaws.com/sivec/login.html')
+        v_sivec.login('login', 'senha')
+        v_sivec.search_sap(sap)
+        v_sivec.get_results_sap()
+        return v_sivec.sivecsap_data
