@@ -15,6 +15,7 @@ class Util:
         detran_cnh = None
         infocrim = None
         jucesp = None
+        siel = None
 
         try:
             arpenp = json.get('arpenp')
@@ -79,7 +80,14 @@ class Util:
         except KeyError:
             pass
 
-        return [arpenp, cadesp, caged_resp, caged_trab, caged_emp, censec, detran_cnh, infocrim, jucesp]
+        try:
+            siel = json.get('siel')
+        except TypeError:
+            pass
+        except KeyError:
+            pass
+
+        return [arpenp, cadesp, caged_resp, caged_trab, caged_emp, censec, detran_cnh, infocrim, jucesp, siel]
 
     def format_export(self, hash):
         search_data = modeller.Search.query.filter_by(search_hash=hash).first()
@@ -92,6 +100,7 @@ class Util:
         detrancnh_data = modeller.DetranCnh.query.filter_by(search_hash=hash).first()
         infocrim_data = modeller.Infocrim.query.filter_by(search_hash=hash).first()
         jucesp_data = modeller.Jucesp.query.filter_by(search_hash=hash).first()
+        siel_data = modeller.Siel.query.filter_by(search_hash=hash).first()
 
         searchstruct = modeller.SearchStruct().dump(search_data)
         arpenpstruct = modeller.ArpenpStruct().dump(arpenp_data)
@@ -103,7 +112,8 @@ class Util:
         detrancnhstruct = modeller.DetranCnhStruct().dump(detrancnh_data)
         infocrimstruct = modeller.InfocrimStruct().dump(infocrim_data)
         jucespstruct = modeller.JucespStruct().dump(jucesp_data)
+        sielstruct = modeller.SielStruct().dump(siel_data)
 
-        aux = dict(search=searchstruct, arpenp=arpenpstruct, cadesp=cadespstruct, caged_resp=cagedrespstruct, caged_trab=cagedtrabstruct, caged_emp=cagedempstruct, censec=censecstruct, detran_cnh=detrancnhstruct, infocrim=infocrimstruct, jucesp=jucespstruct)
+        aux = dict(search=searchstruct, arpenp=arpenpstruct, cadesp=cadespstruct, caged_resp=cagedrespstruct, caged_trab=cagedtrabstruct, caged_emp=cagedempstruct, censec=censecstruct, detran_cnh=detrancnhstruct, infocrim=infocrimstruct, jucesp=jucespstruct, siel=sielstruct)
         search_result = modeller.ResultStruct().dump(aux)
         return search_result

@@ -160,6 +160,19 @@ class JucespStruct(Schema):
     uf = fields.Str()
 
 
+class SielStruct(Schema):
+    nome = fields.Str()
+    titulo = fields.Str()
+    nascimento = fields.Str()
+    zona = fields.Str()
+    endereco = fields.Str()
+    municipio = fields.Str()
+    uf = fields.Str()
+    data_domicilio = fields.Str()
+    nome_pai = fields.Str()
+    nome_mae = fields.Str()
+    naturalidade = fields.Str()
+
 class ResultStruct(Schema):
     '''
       loading: Search database for search_hash in each of the tables; if not None:
@@ -180,6 +193,7 @@ class ResultStruct(Schema):
     detran_cnh = fields.Nested(DetranCnhStruct())
     infocrim = fields.Nested(InfocrimStruct())
     jucesp = fields.Nested(JucespStruct())
+    siel = fields.Nested(SielStruct())
 
 
 class ArispStruct(Schema):
@@ -496,19 +510,6 @@ class Infoseg(db.Model):
         self.categoria_renach = categoria_renach
         self.uf_renach = uf_renach
         self.search_hash = search_hash
-
-class SielStruct(Schema):
-    nome = fields.Str()
-    titulo = fields.Str()
-    nascimento = fields.Str()
-    zona = fields.Str()
-    endereco = fields.Str()
-    municipio = fields.Str()
-    uf = fields.Str()
-    data_domicilio = fields.Str()
-    nome_pai = fields.Str()
-    nome_mae = fields.Str()
-    naturalidade = fields.Str()
 
 
 class Siel(db.Model):

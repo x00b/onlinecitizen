@@ -49,6 +49,10 @@ class Orchestrator:
             proc = Process(target=conf.engine.jucesp_search, args=(pilot, search_hash, target))
             self.pool.append(proc)
             proc.start()
+        elif service_name == 'siel':
+            proc = Process(target=conf.engine.siel_search, args=(pilot, search_hash, target))
+            self.pool.append(proc)
+            proc.start()
 
     def conclude(self):
         for proc in self.pool:

@@ -48,7 +48,8 @@ class Pilot:
         5: 'censec',
         6: 'detran_cnh',
         7: 'infocrim',
-        8: 'jucesp'
+        8: 'jucesp',
+        9: 'siel'
     }
 
     relatorio = ("<!DOCTYPE html>\n"
@@ -244,6 +245,27 @@ class Pilot:
             "                <li>Complemento: {complemento}</li>\n"
             "                <li>CEP: {cep}</li>\n"
             "                <li>UF: {uf}</li>\n"
+            "          </ul>\n"
+            "        </div>\n"
+            "      </article>"),
+        9: ("\n"
+            "        <article class=\"message\">\n"
+            "        <div class=\"message-header\">\n"
+            "          <p>Siel</p>\n"
+            "        </div>\n"
+            "        <div class=\"message-body\">\n"
+            "                <ul>\n"
+            "                <li>Nome: {nome}</li>\n"
+            "                <li>Titulo: {titulo}</li>\n"
+            "                <li>Nascimento: {nascimento}</li>\n"
+            "                <li>Zona: {zona}</li>\n"
+            "                <li>Endereço: {endereco}</li>\n"
+            "                <li>Municipio: {municipio}</li>\n"
+            "                <li>UF: {uf}</li>\n"
+            "                <li>Data Domicilio: {data_domicilio}</li>\n"
+            "                <li>Nome Pai: {nome_pai}</li>\n"
+            "                <li>Nome Mae: {nome_mae}</li>\n"
+            "                <li>Naturalidade: {naturalidade}</li>\n"
             "          </ul>\n"
             "        </div>\n"
             "      </article>")
