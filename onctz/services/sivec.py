@@ -1,10 +1,12 @@
 from time import sleep
-
+import onctz.api.model.models as modeller
 
 class Sivec:
 
-    def __init__(self, browser):
+    def __init__(self, browser, model):
         self.driver = browser.driver
+        self.Model = model
+        self.sivecnome_data = None
 
     def login(self, login, password):
         self.driver.find_element_by_xpath("//*[@id='nomeusuario']").send_keys(login)
@@ -33,22 +35,10 @@ class Sivec:
         profissao = self.driver.find_element_by_xpath("/html/body/form[1]/div/div[5]/div[4]/table/tbody/tr[7]/td[5]/span").text
         naturalizado = self.driver.find_element_by_xpath("/html/body/form[1]/div/div[5]/div[4]/table/tbody/tr[3]/td[2]/span").text
         endereco = self.driver.find_element_by_xpath("/html/body/form[1]/div/div[7]/div[2]/span").text
-        print(nome)
-        print(sexo)
-        print(nascimento)
-        print(rg)
-        print(tipo_rg)
-        print(alcunha)
-        print(naturalidade)
-        print(estado_civil)
-        print(nome_mae)
-        print(pele)
-        print(profissao)
-        print(naturalidade)
-        print(naturalizado)
-        print(endereco)
-        sleep(5)
+
+        self.sivecnome_data = modeller.SivecNome(nome, sexo, nascimento, rg, tipo_rg, alcunha, estado_civil, nome_mae, pele, profissao, naturalidade, naturalizado, endereco, self.Model.search_hash)
         self.driver.quit()
+        return self.sivecnome_data
 
     def search_sap(self, matriculaSap):
         self.driver.find_element_by_xpath("//*[@id='navbar-collapse-1']/ul/li[4]/a").click()

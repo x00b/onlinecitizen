@@ -16,6 +16,7 @@ class Util:
         infocrim = None
         jucesp = None
         siel = None
+        sivec_nome = None
 
         try:
             arpenp = json.get('arpenp')
@@ -87,7 +88,14 @@ class Util:
         except KeyError:
             pass
 
-        return [arpenp, cadesp, caged_resp, caged_trab, caged_emp, censec, detran_cnh, infocrim, jucesp, siel]
+        try:
+            sivec_nome = json.get('sivec_nome')
+        except TypeError:
+            pass
+        except KeyError:
+            pass
+
+        return [arpenp, cadesp, caged_resp, caged_trab, caged_emp, censec, detran_cnh, infocrim, jucesp, siel, sivec_nome]
 
     def format_export(self, hash):
         search_data = modeller.Search.query.filter_by(search_hash=hash).first()
@@ -101,6 +109,7 @@ class Util:
         infocrim_data = modeller.Infocrim.query.filter_by(search_hash=hash).first()
         jucesp_data = modeller.Jucesp.query.filter_by(search_hash=hash).first()
         siel_data = modeller.Siel.query.filter_by(search_hash=hash).first()
+        sivecnome_data = modeller.SivecNome.query.filter_by(search_hash=hash).first()
 
         searchstruct = modeller.SearchStruct().dump(search_data)
         arpenpstruct = modeller.ArpenpStruct().dump(arpenp_data)
@@ -113,7 +122,8 @@ class Util:
         infocrimstruct = modeller.InfocrimStruct().dump(infocrim_data)
         jucespstruct = modeller.JucespStruct().dump(jucesp_data)
         sielstruct = modeller.SielStruct().dump(siel_data)
+        sivecnomestruct = modeller.SivecNomeStruct().dump(sivecnome_data)
 
-        aux = dict(search=searchstruct, arpenp=arpenpstruct, cadesp=cadespstruct, caged_resp=cagedrespstruct, caged_trab=cagedtrabstruct, caged_emp=cagedempstruct, censec=censecstruct, detran_cnh=detrancnhstruct, infocrim=infocrimstruct, jucesp=jucespstruct, siel=sielstruct)
+        aux = dict(search=searchstruct, arpenp=arpenpstruct, cadesp=cadespstruct, caged_resp=cagedrespstruct, caged_trab=cagedtrabstruct, caged_emp=cagedempstruct, censec=censecstruct, detran_cnh=detrancnhstruct, infocrim=infocrimstruct, jucesp=jucespstruct, siel=sielstruct, sivec_nome=sivecnomestruct)
         search_result = modeller.ResultStruct().dump(aux)
         return search_result

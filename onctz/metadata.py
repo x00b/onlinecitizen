@@ -9,7 +9,6 @@ from rq import Queue
 
 
 class Metadata:
-
     # flask app, sqlalchemy and marshmallow setup
     app = Flask(str("oncitizen"))
     basedir = path.abspath(path.dirname(__file__))
@@ -49,7 +48,8 @@ class Pilot:
         6: 'detran_cnh',
         7: 'infocrim',
         8: 'jucesp',
-        9: 'siel'
+        9: 'siel',
+        10: 'sivec_nome'
     }
 
     relatorio = ("<!DOCTYPE html>\n"
@@ -268,8 +268,31 @@ class Pilot:
             "                <li>Naturalidade: {naturalidade}</li>\n"
             "          </ul>\n"
             "        </div>\n"
-            "      </article>")
-        }
+            "      </article>"),
+        10: ("\n"
+             "        <article class=\"message\">\n"
+             "        <div class=\"message-header\">\n"
+             "          <p>Sivec Pessoa</p>\n"
+             "        </div>\n"
+             "        <div class=\"message-body\">\n"
+             "                <ul>\n"
+             "                <li>Nome: {nome}</li>\n"
+             "                <li>Sexo: {sexo}</li>\n"
+             "                <li>Nascimento: {nascimento}</li>\n"
+             "                <li>RG: {rg}</li>\n"
+             "                <li>Tipo RG: {tipo_rg}</li>\n"
+             "                <li>Alcunha: {alcunha}</li>\n"
+             "                <li>Estado Civil: {estado_civil}</li>\n"
+             "                <li>Nome Mae: {nome_mae}</li>\n"
+             "                <li>Pele: {pele}</li>\n"
+             "                <li>Profissao: {profissao}</li>\n"
+             "                <li>Naturalidade: {naturalidade}</li>\n"
+             "                <li>Naturalizado: {naturalizado}</li>\n"
+             "                <li>Endereço: {endereco}</li>\n"
+             "          </ul>\n"
+             "        </div>\n"
+             "      </article>"),
+    }
 
     def search(self, browser):
         self.service = Service(browser)

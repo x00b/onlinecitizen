@@ -173,6 +173,24 @@ class SielStruct(Schema):
     nome_mae = fields.Str()
     naturalidade = fields.Str()
 
+
+class SivecNomeStruct(Schema):
+    nome = fields.Str()
+    sexo = fields.Str()
+    nascimento = fields.Str()
+    rg = fields.Str()
+    tipo_rg = fields.Str()
+    alcunha = fields.Str()
+    naturalidade = fields.Str()
+    estado_civil = fields.Str()
+    nome_mae = fields.Str()
+    pele = fields.Str()
+    profissao = fields.Str()
+    naturalidade = fields.Str()
+    naturalizado = fields.Str()
+    endereco = fields.Str()
+
+
 class ResultStruct(Schema):
     '''
       loading: Search database for search_hash in each of the tables; if not None:
@@ -194,6 +212,7 @@ class ResultStruct(Schema):
     infocrim = fields.Nested(InfocrimStruct())
     jucesp = fields.Nested(JucespStruct())
     siel = fields.Nested(SielStruct())
+    sivec_nome = fields.Nested(SivecNomeStruct())
 
 
 class ArispStruct(Schema):
@@ -540,23 +559,6 @@ class Siel(db.Model):
         self.nome_mae = nome_mae
         self.naturalidade = naturalidade
         self.search_hash = search_hash
-
-
-class SivecNomeStruct(Schema):
-    nome = fields.Str()
-    sexo = fields.Str()
-    nascimento = fields.Str()
-    rg = fields.Str()
-    tipo_rg = fields.Str()
-    alcunha = fields.Str()
-    naturalidade = fields.Str()
-    estado_civil = fields.Str()
-    nome_mae = fields.Str()
-    pele = fields.Str()
-    profissao = fields.Str()
-    naturalidade = fields.Str()
-    naturalizado = fields.Str()
-    endereco = fields.Str()
 
 
 class SivecNome(db.Model):

@@ -8,6 +8,8 @@ from onctz.services.infocrim import Infocrim
 from onctz.services.caged import Caged
 from onctz.services.jucesp import Jucesp
 from onctz.services.siel import Siel
+from onctz.services.sivec import Sivec
+
 from onctz.api.model.DAO import Model
 import onctz.api.model.models as modeller
 from onctz.api.util import Util
@@ -130,6 +132,14 @@ class Engine:
         self.db.add(siel)
         self.db.commit()
 
+    def sivecnome_search(self, pilot, search_hash, target):
+        brw = self.newinstance()
+        pilot.search(brw)
+        pilot.service.setModel(search_hash)
+        sivec = pilot.service.sivec_nome(target)
+        self.db.add(sivec)
+        self.db.commit()
+
 
 class Service:
     def __init__(self, browser):
@@ -219,3 +229,11 @@ class Service:
         v_siel.search(nome, "321")
         v_siel.get_results()
         return v_siel.sieldata
+
+    def sivec_nome(self, nome):
+        v_sivec = Sivec(self.browser, self.model)
+        self.browser.navigate('http://fiap:mpsp@ec2-18-231-116-58.sa-east-1.compute.amazonaws.com/sivec/login.html')
+        v_sivec.login('login', 'senha')
+        v_sivec.search_nome(nome)
+        v_sivec.get_results_nome()
+        return v_sivec.sivecnome_data
