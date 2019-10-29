@@ -61,6 +61,10 @@ class Orchestrator:
             proc = Process(target=conf.engine.sivecsap_search, args=(pilot, search_hash, target))
             self.pool.append(proc)
             proc.start()
+        elif service_name == 'arisp':
+            proc = Process(target=conf.engine.arisp_search, args=(pilot, search_hash, target))
+            self.pool.append(proc)
+            proc.start()
 
     def conclude(self):
         for proc in self.pool:

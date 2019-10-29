@@ -207,6 +207,10 @@ class SivecSapStruct(Schema):
     endereco = fields.Str()
 
 
+class ArispStruct(Schema):
+    relatorio = fields.Str()
+
+
 class ResultStruct(Schema):
     '''
       loading: Search database for search_hash in each of the tables; if not None:
@@ -230,10 +234,7 @@ class ResultStruct(Schema):
     siel = fields.Nested(SielStruct())
     sivec_nome = fields.Nested(SivecNomeStruct())
     sivec_sap = fields.Nested(SivecSapStruct())
-
-
-class ArispStruct(Schema):
-    relatorio = fields.Str()
+    arisp = fields.Nested(ArispStruct())
 
 
 class Arisp(db.Model):

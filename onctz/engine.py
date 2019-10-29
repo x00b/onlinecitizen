@@ -52,6 +52,14 @@ class Engine:
         search.status = 1
         self.db.commit()
 
+    def arisp_search(self, pilot, search_hash, target):
+        brw = self.newinstance()
+        pilot.search(brw)
+        pilot.service.setModel(search_hash)
+        arisp = pilot.service.arisp(target)
+        self.db.add(arisp)
+        self.db.commit()
+
     def arpenp_search(self, pilot, search_hash, target):
         brw = self.newinstance()
         pilot.search(brw)
@@ -158,11 +166,14 @@ class Service:
         self.model = Model(hash)
 
     def arisp(self, cpf_cnpj):
-        v_arisp = Arisp(self.browser)
+        v_arisp = Arisp(self.browser, self.model)
         self.browser.navigate('http://fiap:mpsp@ec2-18-231-116-58.sa-east-1.compute.amazonaws.com/arisp/login.html')
-
-        v_arisp.search(cpf_cnpj)
-        v_arisp.get_results()
+        try:
+            v_arisp.search(cpf_cnpj)
+            v_arisp.get_results()
+            return v_arisp.arisp_data
+        except:
+            return modeller.Arisp("error", self.model.search_hash)
 
     def arpenp(self, numProcesso):
         v_arpenp = Arpenp(self.browser, self.model)

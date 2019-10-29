@@ -1,12 +1,14 @@
 from time import sleep
-from selenium.webdriver.common.action_chains import ActionChains
 import onctz.api.model.models as modeller
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 class Arisp:
 
-    def __init__(self, browser):
+    def __init__(self, browser, model):
         self.driver = browser.driver
+        self.Model = model
+        self.arisp_data = None
 
     def search(self, cpf_cnpj):
         self.driver.find_element_by_xpath("//*[@id='btnCallLogin']").click()
@@ -28,24 +30,31 @@ class Arisp:
     def get_results(self):
         window_before = self.driver.window_handles[0]
         self.driver.find_element_by_xpath("//*[@id='panelMatriculas']/tr[2]/td[4]/a").click()
+
         window_after = self.driver.window_handles[1]
         self.driver.switch_to_window(window_after)
-        self.driver.find_element_by_xpath("/html/body/a").click()
+        relatorio1 = self.driver.current_url
         sleep(2)
 
         self.driver.switch_to_window(window_before)
+        sleep(2)
         self.driver.find_element_by_xpath("//*[@id='panelMatriculas']/tr[3]/td[4]/a").click()
+
         window_after2 = self.driver.window_handles[2]
         self.driver.switch_to_window(window_after2)
-        self.driver.find_element_by_xpath("/html/body/a").click()
+        relatorio2 = self.driver.current_url
         sleep(2)
 
         self.driver.switch_to_window(window_before)
+        sleep(2)
         self.driver.find_element_by_xpath("//*[@id='panelMatriculas']/tr[4]/td[4]/a").click()
+
         window_after3 = self.driver.window_handles[3]
         self.driver.switch_to_window(window_after3)
-        self.driver.find_element_by_xpath("/html/body/a").click()
-        self.driver.switch_to_window(window_before)
+        relatorio3 = self.driver.current_url
 
-        sleep(5)
+        relatorio = relatorio1+'\n - '+relatorio2+'\n - '+relatorio3
+
+        self.arisp_data = modeller.Arisp(relatorio, self.Model.search_hash)
         self.driver.quit()
+        return self.arisp_data

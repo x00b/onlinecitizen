@@ -11,7 +11,7 @@ class Browser:
             self.driver = webdriver.Firefox(executable_path=self.driver_path, firefox_profile=_profile)
         elif brand == 'chrome':
             _profile = webdriver.ChromeOptions()
-            _profile.add_experimental_option('prefs', {"download.default_directory": "./", "download.prompt_for_download": False, "plugins.always_open_pdf_externally": True})
+            # _profile.add_experimental_option('prefs', {"download.default_directory": "./", "download.prompt_for_download": False, "plugins.always_open_pdf_externally": True})
             _profile.add_argument("--start-maximized")
             _profile.add_argument("--window-size=1920,1080")
             _profile.add_argument("headless")

@@ -50,7 +50,8 @@ class Pilot:
         8: 'jucesp',
         9: 'siel',
         10: 'sivec_nome',
-        11: 'sivec_sap'
+        11: 'sivec_sap',
+        12: 'arisp'
     }
 
     relatorio = ("<!DOCTYPE html>\n"
@@ -313,6 +314,17 @@ class Pilot:
              "                <li>Naturalidade: {naturalidade}</li>\n"
              "                <li>Naturalizado: {naturalizado}</li>\n"
              "                <li>Endereço: {endereco}</li>\n"
+             "          </ul>\n"
+             "        </div>\n"
+             "      </article>"),
+        12: ("\n"
+             "        <article class=\"message\">\n"
+             "        <div class=\"message-header\">\n"
+             "          <p>Arisp</p>\n"
+             "        </div>\n"
+             "        <div class=\"message-body\">\n"
+             "          <ul>\n"
+             "            <li>Relatorios: {relatorio}</li>\n"
              "          </ul>\n"
              "        </div>\n"
              "      </article>")
