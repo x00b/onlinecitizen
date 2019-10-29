@@ -8,6 +8,8 @@ class Detran:
     def __init__(self, browser, model):
         self.driver = browser.driver
         self.detrancnh_data = None
+        self.detrancondutor_data = None
+        self.detranveiculo_data = None
         self.Model = model
 
     def login(self, login, password):
@@ -23,8 +25,10 @@ class Detran:
 
     def get_results_condutor(self):
         self.driver.find_element_by_xpath("//*[@id='form:j_id2049423534_c43228e_content']/table[3]/tbody/tr/td/a/span").click()
-        sleep(5)
+        relatorio = self.driver.current_url
+        self.detrancondutor_data = modeller.DetranCondutor(relatorio, self.Model.search_hash)
         self.driver.quit()
+        return self.detrancondutor_data
 
     def search_veiculo(self, cpf_cnpj, placa):
         ActionChains(self.driver).move_to_element(self.driver.find_element_by_xpath("//*[@id='navigation_a_M_18']")).perform()
@@ -35,8 +39,10 @@ class Detran:
 
     def get_results_veiculo(self):
         self.driver.find_element_by_xpath("//*[@id='form:j_id2124610415_1b3be155_content']/table[3]/tbody/tr/td/a/span").click()
-        sleep(5)
+        relatorio = self.driver.current_url
+        self.detranveiculo_data = modeller.DetranVeiculo(relatorio, self.Model.search_hash)
         self.driver.quit()
+        return self.detranveiculo_data
 
     def get_search_cnh(self, cpf):
         ActionChains(self.driver).move_to_element(self.driver.find_element_by_xpath("//*[@id='navigation_a_M_16']")).perform()

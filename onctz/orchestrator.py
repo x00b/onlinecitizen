@@ -65,6 +65,14 @@ class Orchestrator:
             proc = Process(target=conf.engine.arisp_search, args=(pilot, search_hash, target))
             self.pool.append(proc)
             proc.start()
+        elif service_name == 'detran_cond':
+            proc = Process(target=conf.engine.detrancond_search, args=(pilot, search_hash, target))
+            self.pool.append(proc)
+            proc.start()
+        elif service_name == 'detran_veic':
+            proc = Process(target=conf.engine.detranveic_search, args=(pilot, search_hash, target))
+            self.pool.append(proc)
+            proc.start()
 
     def conclude(self):
         for proc in self.pool:

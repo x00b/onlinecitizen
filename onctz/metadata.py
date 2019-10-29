@@ -51,7 +51,9 @@ class Pilot:
         9: 'siel',
         10: 'sivec_nome',
         11: 'sivec_sap',
-        12: 'arisp'
+        12: 'arisp',
+        13: 'detran_cond',
+        14: 'detran_veic'
     }
 
     relatorio = ("<!DOCTYPE html>\n"
@@ -325,6 +327,28 @@ class Pilot:
              "        <div class=\"message-body\">\n"
              "          <ul>\n"
              "            <li>Relatorios: {relatorio}</li>\n"
+             "          </ul>\n"
+             "        </div>\n"
+             "      </article>"),
+        13: ("\n"
+             "        <article class=\"message\">\n"
+             "        <div class=\"message-header\">\n"
+             "          <p>Detran Condutor</p>\n"
+             "        </div>\n"
+             "        <div class=\"message-body\">\n"
+             "          <ul>\n"
+             "            <li>Resultado: {relatorio}</li>\n"
+             "          </ul>\n"
+             "        </div>\n"
+             "      </article>"),
+        14: ("\n"
+             "        <article class=\"message\">\n"
+             "        <div class=\"message-header\">\n"
+             "          <p>Detran Veiculo</p>\n"
+             "        </div>\n"
+             "        <div class=\"message-body\">\n"
+             "          <ul>\n"
+             "            <li>Resultado: {relatorio}</li>\n"
              "          </ul>\n"
              "        </div>\n"
              "      </article>")

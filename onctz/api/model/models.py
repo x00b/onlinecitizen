@@ -120,10 +120,6 @@ class CensecStruct(Schema):
     partes = fields.Str()
 
 
-class DetranCondutorStruct(Schema):
-    relatorio = fields.Str()
-
-
 class DetranCnhStruct(Schema):
     renach = fields.Str()
     categoria = fields.Str()
@@ -211,6 +207,14 @@ class ArispStruct(Schema):
     relatorio = fields.Str()
 
 
+class DetranVeiculoStruct(Schema):
+    relatorio = fields.Str()
+
+
+class DetranCondutorStruct(Schema):
+    relatorio = fields.Str()
+
+
 class ResultStruct(Schema):
     '''
       loading: Search database for search_hash in each of the tables; if not None:
@@ -235,6 +239,8 @@ class ResultStruct(Schema):
     sivec_nome = fields.Nested(SivecNomeStruct())
     sivec_sap = fields.Nested(SivecSapStruct())
     arisp = fields.Nested(ArispStruct())
+    detran_cond = fields.Nested(DetranCondutorStruct())
+    detran_veic = fields.Nested(DetranVeiculoStruct())
 
 
 class Arisp(db.Model):
@@ -432,9 +438,6 @@ class DetranCnh(db.Model):
         self.registro = registro
         self.tipografico = tipografico
         self.search_hash = search_hash
-
-class DetranVeiculoStruct(Schema):
-    relatorio = fields.Str()
 
 
 class DetranVeiculo(db.Model):

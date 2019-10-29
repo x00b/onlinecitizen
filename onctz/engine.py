@@ -116,6 +116,22 @@ class Engine:
         self.db.add(detrancnh)
         self.db.commit()
 
+    def detrancond_search(self, pilot, search_hash, target):
+        brw = self.newinstance()
+        pilot.search(brw)
+        pilot.service.setModel(search_hash)
+        detrancond = pilot.service.detran_cond(target)
+        self.db.add(detrancond)
+        self.db.commit()
+
+    def detranveic_search(self, pilot, search_hash, target):
+        brw = self.newinstance()
+        pilot.search(brw)
+        pilot.service.setModel(search_hash)
+        detranveic = pilot.service.detran_veiculo(target)
+        self.db.add(detranveic)
+        self.db.commit()
+
     def infocrim_search(self, pilot, search_hash):
         brw = self.newinstance()
         pilot.search(brw)
@@ -249,6 +265,28 @@ class Service:
             return v_detran.detrancnh_data
         except:
             return modeller.DetranCnh("error", "error", "error", "error", "error", "error", "error", "error", "error", "error", "error", self.model.search_hash)
+
+    def detran_cond(self, cpf):
+        v_detran = Detran(self.browser, self.model)
+        self.browser.navigate('http://fiap:mpsp@ec2-18-231-116-58.sa-east-1.compute.amazonaws.com/detran/login.html')
+        try:
+            v_detran.login('login', 'senha')
+            v_detran.search_condutor(cpf)
+            v_detran.get_results_condutor()
+            return v_detran.detrancondutor_data
+        except:
+            return modeller.DetranCondutor("error", self.model.search_hash)
+
+    def detran_veiculo(self, placa):
+        v_detran = Detran(self.browser, self.model)
+        self.browser.navigate('http://fiap:mpsp@ec2-18-231-116-58.sa-east-1.compute.amazonaws.com/detran/login.html')
+        try:
+            v_detran.login('login', 'senha')
+            v_detran.search_veiculo("12345", placa)
+            v_detran.get_results_veiculo()
+            return v_detran.detranveiculo_data
+        except:
+            return modeller.DetranVeiculo("error", self.model.search_hash)
 
     def infocrim(self):
         v_infocrim = Infocrim(self.browser, self.model)
