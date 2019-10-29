@@ -160,6 +160,7 @@ class Service:
     def arisp(self, cpf_cnpj):
         v_arisp = Arisp(self.browser)
         self.browser.navigate('http://fiap:mpsp@ec2-18-231-116-58.sa-east-1.compute.amazonaws.com/arisp/login.html')
+
         v_arisp.search(cpf_cnpj)
         v_arisp.get_results()
 
@@ -167,62 +168,86 @@ class Service:
         v_arpenp = Arpenp(self.browser, self.model)
         self.browser.navigate('http://fiap:mpsp@ec2-18-231-116-58.sa-east-1.compute.amazonaws.com/arpensp/login.html')
         # add try/except =>
-        v_arpenp.search(numProcesso)
-        return v_arpenp.get_results()
+        try:
+            v_arpenp.search(numProcesso)
+            return v_arpenp.get_results()
+        except Exception:
+            return modeller.Arpenp("error", "error", "error", "error", "error", "error", "error", "error", "error", "error", "error", self.model.search_hash)
 
     def cadesp(self, cnpj):
         v_cadesp = Cadesp(self.browser, self.model)
         self.browser.navigate('http://fiap:mpsp@ec2-18-231-116-58.sa-east-1.compute.amazonaws.com/cadesp/login.html')
-        v_cadesp.login('fiap', 'mpsp')
-        v_cadesp.search(cnpj)
-        return v_cadesp.get_results()
+        try:
+            v_cadesp.login('fiap', 'mpsp')
+            v_cadesp.search(cnpj)
+            return v_cadesp.get_results()
+        except:
+            return modeller.Cadesp("error", "error", "error", "error", "error", "error", "error", "error", self.model.search_hash)
 
     def caged_responsavel(self, chave):
         v_caged = Caged(self.browser, self.model)
         self.browser.navigate('http://fiap:mpsp@ec2-18-231-116-58.sa-east-1.compute.amazonaws.com/caged/login.html')
-        v_caged.login('login', 'senha')
-        v_caged.search_responsavel(chave)
-        v_caged.get_results_responsavel()
-        return v_caged.cagedresponsavel_data
+        try:
+            v_caged.login('login', 'senha')
+            v_caged.search_responsavel(chave)
+            v_caged.get_results_responsavel()
+            return v_caged.cagedresponsavel_data
+        except:
+            return modeller.CagedResponsavel("error", "error", "error",  "error", "error", "error", "error", "error", "error", "error", self.model.search_hash)
 
     def caged_trabalhador(self, chave):
         v_caged = Caged(self.browser, self.model)
         self.browser.navigate('http://fiap:mpsp@ec2-18-231-116-58.sa-east-1.compute.amazonaws.com/caged/login.html')
-        v_caged.login('login', 'senha')
-        v_caged.search_trab(chave)
-        v_caged.get_results_trab()
-        return v_caged.cagedtrabalhador_data
+        try:
+            v_caged.login('login', 'senha')
+            v_caged.search_trab(chave)
+            v_caged.get_results_trab()
+            return v_caged.cagedtrabalhador_data
+        except:
+            return modeller.CagedTrabalhador("error", "error", "error", "error", "error", "error", "error", "error", "error", "error", "error", "error", "error", self.model.search_hash)
 
     def caged_empresa(self, chave):
         v_caged = Caged(self.browser, self.model)
         self.browser.navigate('http://fiap:mpsp@ec2-18-231-116-58.sa-east-1.compute.amazonaws.com/caged/login.html')
-        v_caged.login('login', 'senha')
-        v_caged.search_emp(chave)
-        v_caged.get_results_emp()
-        return v_caged.cagedempresa_data
+        try:
+            v_caged.login('login', 'senha')
+            v_caged.search_emp(chave)
+            v_caged.get_results_emp()
+            return v_caged.cagedempresa_data
+        except:
+            return modeller.CagedEmpresa("error", "error", "error", "error", "error", "error", self.model.search_hash)
 
     def censec(self, cpf_cnpj):
         v_censec = Censec(self.browser, self.model)
         self.browser.navigate('http://fiap:mpsp@ec2-18-231-116-58.sa-east-1.compute.amazonaws.com/censec/login.html')
-        v_censec.login('login', 'senha')
-        v_censec.search(cpf_cnpj)
-        v_censec.get_results()
-        return v_censec.censec_data
+        try:
+            v_censec.login('login', 'senha')
+            v_censec.search(cpf_cnpj)
+            v_censec.get_results()
+            return v_censec.censec_data
+        except:
+            return modeller.Censec("error", "error", "error", "error", "error", self.model.search_hash)
 
     def detran_cnh(self, cpf):
         v_detran = Detran(self.browser, self.model)
         self.browser.navigate('http://fiap:mpsp@ec2-18-231-116-58.sa-east-1.compute.amazonaws.com/detran/login.html')
-        v_detran.login('login', 'senha')
-        v_detran.get_search_cnh(cpf)
-        v_detran.get_results_cnh()
-        return v_detran.detrancnh_data
+        try:
+            v_detran.login('login', 'senha')
+            v_detran.get_search_cnh(cpf)
+            v_detran.get_results_cnh()
+            return v_detran.detrancnh_data
+        except:
+            return modeller.DetranCnh("error", "error", "error", "error", "error", "error", "error", "error", "error", "error", "error", self.model.search_hash)
 
     def infocrim(self):
         v_infocrim = Infocrim(self.browser, self.model)
         self.browser.navigate('http://fiap:mpsp@ec2-18-231-116-58.sa-east-1.compute.amazonaws.com/infocrim/login.html')
-        v_infocrim.login('login', 'senha')
-        v_infocrim.search()
-        return v_infocrim.get_results()
+        try:
+            v_infocrim.login('login', 'senha')
+            v_infocrim.search()
+            return v_infocrim.get_results()
+        except:
+            return modeller.Infocrim("error", self.model.search_hash)
 
     def jucesp(self, nome):
         v_jucesp = Jucesp(self.browser, self.model)
