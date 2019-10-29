@@ -23,7 +23,7 @@ class Metadata:
     db = SQLAlchemy(app)
     ma = Marshmallow(app)
     rds = redis.Redis()
-    queue = Queue(connection=rds)
+    queue = Queue(connection=rds, default_timeout=3600)
 
     def __init__(self):
         self.engine = None
