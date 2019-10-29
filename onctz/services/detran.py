@@ -25,6 +25,8 @@ class Detran:
 
     def get_results_condutor(self):
         self.driver.find_element_by_xpath("//*[@id='form:j_id2049423534_c43228e_content']/table[3]/tbody/tr/td/a/span").click()
+        window_after = self.driver.window_handles[1]
+        self.driver.switch_to_window(window_after)
         relatorio = self.driver.current_url
         self.detrancondutor_data = modeller.DetranCondutor(relatorio, self.Model.search_hash)
         self.driver.quit()
@@ -39,6 +41,8 @@ class Detran:
 
     def get_results_veiculo(self):
         self.driver.find_element_by_xpath("//*[@id='form:j_id2124610415_1b3be155_content']/table[3]/tbody/tr/td/a/span").click()
+        window_after = self.driver.window_handles[1]
+        self.driver.switch_to_window(window_after)
         relatorio = self.driver.current_url
         self.detranveiculo_data = modeller.DetranVeiculo(relatorio, self.Model.search_hash)
         self.driver.quit()
